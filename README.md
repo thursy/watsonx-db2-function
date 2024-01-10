@@ -39,6 +39,9 @@ ibmcloud fn action create <the-function-name-> --docker <docker-username/repo:ta
 ibmcloud fn action create myfunctionname --docker thursysatriani/fn-watsonx:ibmcfn app.py --web true
 ```
 
+## __Connect it with Watson Assistant__
+To connect this deployed function with Watson Assistant, please modify the [json file](https://github.com/thursy/watsonx-db2-function/blob/main/openapi_wxdb2func.json) that provide OpenAPI.json format.
+Please modify the paths, and the schema of request and response. Use the modified JSON file as extension of Watson Assistant in Integration part.
 
 ### References:
 - Data – https://www.kaggle.com/datasets/thammuio/all-agriculture-related-datasets-for-india/ 
