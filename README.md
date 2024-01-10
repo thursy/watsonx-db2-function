@@ -8,20 +8,23 @@ The underlying technologies powering this project include:
 - IBM Cloud Functions for the serverless execution of the Python script.
 
 By merging these technologies, we aim to bridge the gap between conversational interfaces and powerful data querying, simplifying the interaction and querying process for users.
-The expected Result:
+
+## __The expected Result:__
+
 <img src="https://github.com/thursy/watsonx-db2-function/assets/32385413/e2316fab-1a5b-4332-bc73-739e4b63f500" alt="image" width="40%" height="auto">
 
 
-The architecture:
+## __The architecture:__
+
 <img width="1114" alt="image" src="https://github.com/thursy/watsonx-db2-function/assets/32385413/11256a00-970a-4bf6-84ed-ddfa3af58b69">
 
 
-Credentials required:
+## __Credentials required:__
 - DB2 host, password, username
 - watsonx.ai project ID
 - IAM APIKEY
   
-__Replace all of required credentials in the app.py using your own credentials.__
+## __Replace all of required credentials in the app.py using your own credentials.__
 Note: Git Clone this repo, and replace the with your own credentials, upload your file to IBM Cloud Shell or IBM Cloud CLI.
 By using the Docker Image hosted in [DockerHub](https://hub.docker.com/repository/docker/thursysatriani/fn-watsonx/general),
 you can use the CLI or Cloud Shell in IBM Cloud to run this commands:
@@ -37,7 +40,7 @@ ibmcloud fn action create myfunctionname --docker thursysatriani/fn-watsonx:ibmc
 ```
 
 
-References:
+### References:
 - Data – https://www.kaggle.com/datasets/thammuio/all-agriculture-related-datasets-for-india/ 
 - Tutorial – https://medium.com/@yi.angela/connecting-watson-assistant-to-db2-with-ibm-cloud-function-and-a-custom-extension-89bbe4c6a83b 
 - Sample code – https://github.com/thursy/watsonx-db2-function 
