@@ -1,0 +1,8 @@
+numpy==1.24.2
+pandas==1.5.3
+fastapi==0.61.2
+uvicorn
+python-multipart
+ibm_watson==7.0.1
+ibm-watson-machine-learning==1.0.327
+ibm-db

@@ -1,12 +1,3 @@
-#
-#
-# main() will be run when you invoke this action
-#
-# @param Cloud Functions actions accept a single parameter, which must be a JSON object.
-#
-# @return The output of this action, which must be a JSON object.
-#
-#
 import sys
 import json
 import os, ibm_db, ibm_db_dbi as dbi, pandas as pd
@@ -15,17 +6,23 @@ import requests
 from ibm_watson_machine_learning.foundation_models import Model
 from ibm_watson_machine_learning.metanames import GenTextParamsMetaNames as GenParams
 
+WX_API_KEY = os.environ['WX_API_KEY']
+WX_PROJECT_ID = os.environ['WX_PROJECT_ID']
 
-###=======================Main function====================================
-def main(params):
-    user_query = params['user_query']
+DB2_HOST = os.environ['DB2_HOST']
+DB2_PORT = os.environ['DB2_PORT']
+DB2_USERNAME = os.environ['DB2_USERNAME']
+DB2_PASSWORD = os.environ['DB2_PASSWORD']
+
+
+async def get_answer_wxdb(user_query):
     
     db2_dsn = 'DATABASE={};HOSTNAME={};PORT={};PROTOCOL=TCPIP;UID={uid};PWD={pwd};SECURITY=SSL'.format(
         'bludb',
-        'XXXX.databases.appdomain.cloud',   #host
-        'XXXX',         #Port
-        uid='XXXX',     #username
-        pwd='XXXX'      #password
+        DB2_HOST,   
+        DB2_PORT,         
+        uid=DB2_USERNAME,     
+        pwd=DB2_PASSWORD     
     )
     
     db2_connection = dbi.connect(db2_dsn)
@@ -82,9 +79,8 @@ def main(params):
     response = json.loads(response.strip())
     
     return response
-    
 
-###=========================HELPER FUNCTION=============================================    
+
 def send_to_watsonxai(prompts,
                     model_name='meta-llama/llama-2-70b-chat',
                     decoding_method="greedy",
@@ -122,13 +118,11 @@ def send_to_watsonxai(prompts,
         GenParams.STOP_SEQUENCES: stop_sequences
     }
 
-    api_key =  "XXXX"   #IBM Cloud API Key
     ibm_cloud_url = "https://us-south.ml.cloud.ibm.com"
-    project_id = "XXXX" #Project ID watsox.ai
 
     creds = {
         "url": ibm_cloud_url,
-        "apikey": api_key 
+        "apikey": WX_API_KEY 
     }
 
     # Instantiate a model proxy object to send your requests
@@ -136,7 +130,7 @@ def send_to_watsonxai(prompts,
         model_id=model_name,
         params=model_params,
         credentials=creds,
-        project_id=project_id)
+        project_id=WX_PROJECT_ID)
 
 
     for prompt in prompts:
